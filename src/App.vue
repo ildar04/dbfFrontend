@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <span>todo</span>
+    <router-view></router-view>
   </v-app>
 </template>
 
