@@ -1,9 +1,9 @@
 <template>
   <div>
     <v-app-bar
-      color="deep-purple accent-4"
+      color="white"
       dense
-      dark
+
     >
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 

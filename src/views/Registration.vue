@@ -45,8 +45,6 @@
     export default {
         name: "loginPage",
         mounted(){
-            // console.log('created login component');
-            // console.log(this.$store.getters['cart/test']);
         },
         data(){
             return {
@@ -60,7 +58,6 @@
             submit() {
                 this.$store.dispatch('auth/registration', {fullName: this.fullName, login: this.login, password: this.password}).then((data)=> {
                     if(data) {
-                        console.log('registration');
                         this.$router.push('/')
                     }
                 });
