@@ -5,36 +5,14 @@ Vue.use(Router);
 
 export default new Router({
     routes: [
-        // {
-        //     path: "/",
-        //     component: () => import("@/views/Home"),
-        //     children: [
-        //         {
-        //             path: "",
-        //             name: "home",
-        //             component: () => import("@/views/HomeGlobal")
-        //         },
-        //         {
-        //             path: "my-feed",
-        //             name: "home-my-feed",
-        //             component: () => import("@/views/HomeMyFeed")
-        //         },
-        //         {
-        //             path: "tag/:tag",
-        //             name: "home-tag",
-        //             component: () => import("@/views/HomeTag")
-        //         }
-        //     ]
-        // },
+        {
+            path: "/",
+            component: () => import("@/views/Home"),
+        },
         {
             name: "login",
             path: "/login",
             component: () => import("@/views/Login")
-        },
-        // {
-        //     name: "register",
-        //     path: "/register",
-        //     component: () => import("@/views/Register")
-        // }
+        }
     ]
 });
