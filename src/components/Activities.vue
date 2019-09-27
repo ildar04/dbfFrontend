@@ -20,9 +20,6 @@ export default {
     beforeCreate: function() {
         this.$store.dispatch('activities/getItems');
     },
-    mounted: function() {
-        debugger;
-    },
     data: function() {
         return {
             loading: true,
