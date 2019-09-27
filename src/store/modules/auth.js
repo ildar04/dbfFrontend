@@ -49,6 +49,10 @@ export default {
     login({state, commit}, data) {
       commit('setToken', '123123');
       return true
+    },
+    registration({state, commit}, data) {
+      // send
+      return true
     }
 
     // addProductToCart({state, getters, commit, rootState, rootGetters}, product) {
