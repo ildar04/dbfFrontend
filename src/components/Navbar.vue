@@ -11,7 +11,7 @@
         <v-btn depressed small color="primary" v-on:click="toCreateActivity">Создать мероприятие</v-btn>
 
         <v-btn icon v-if="authentificated">
-          <v-icon v-on:click="handleGoToProfile">mdi-logout</v-icon>
+          <v-icon v-on:click="handleGoToProfile">mdi-account-circle</v-icon>
         </v-btn>
 
         <v-btn icon v-if="authentificated">
