@@ -1,9 +1,11 @@
 import API from "@/api";
+import router from "../../routers";
 
 export default {
     namespaced: true,
   
     state: {
+        currentActivityUid: "",
         items: []
     },
   
@@ -20,17 +22,26 @@ export default {
     mutations: {
       setItems (state, items) {
         state.items = items
+      },
+
+      setActivity(state, activityUid) {
+          state.currentActivityUid = activityUid;
       }
     },
   
     actions: {
         getItems({commit}) {
-            API.get("api/activity").then(res => {
+            API.get("api/activities").then(res => {
                 let data = res.data;
                 if (data) {
                     commit('setItems', data);
                 }
             });
+        },
+
+        showDetails({commit}, payload) {
+            router.push({ path: `/activitydetails/${payload}` });
+            commit("setActivity", payload);
         }
     }
   }

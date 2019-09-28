@@ -1,11 +1,25 @@
 <template>
-    <v-row>
+    <v-row
+        align="center"
+        justify="center"
+        class="form-style"
+    >
         <v-col
-            :cols="4"
-            offset-md="4"
-            class="verticallyCenter"
+        cols="12"
+        sm="8"
+        md="6"
         >
-            <form>
+        <v-card class="elevation-12">
+            <v-toolbar
+            color="primary"
+            dark
+            flat
+            >
+            <v-toolbar-title>Регистрация</v-toolbar-title>
+            <div class="flex-grow-1"></div>
+            </v-toolbar>
+            <v-card-text>
+            <v-form>
                 <v-text-field
                     v-model="fullName"
                     :counter="10"
@@ -14,11 +28,11 @@
                     required
                 ></v-text-field>
                 <v-text-field
-                        v-model="login"
-                        :counter="10"
-                        label="Логин"
-                        data-vv-name="login"
-                        required
+                v-model="login"
+                :counter="10"
+                label="Логин"
+                data-vv-name="login"
+                required
                 ></v-text-field>
 
                 <v-text-field
@@ -35,8 +49,14 @@
                         data-vv-name="repeatPassword"
                         required
                 ></v-text-field>
-                <v-btn class="mr-4" @click="submit">Регистрация</v-btn>
-            </form>
+            </v-form>
+            </v-card-text>
+            <v-card-actions>
+            <div class="flex-grow-1"></div>
+            <v-btn color="" class="mr-4" @click="switchToAuth">Авторизация</v-btn>
+            <v-btn color="primary" class="mr-4" @click="submit">Зарегистрироваться</v-btn>
+            </v-card-actions>
+        </v-card>
         </v-col>
     </v-row>
 </template>
@@ -61,6 +81,9 @@
                         this.$router.push('/')
                     }
                 });
+            },
+            switchToAuth() {
+                this.$router.push('/login');
             }
         },
 
@@ -72,5 +95,8 @@
 
     };
 </script>
-<style scoped>
+<style>
+.form-style {
+    min-width: 400px;
+}
 </style>
