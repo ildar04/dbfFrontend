@@ -44,6 +44,15 @@ export default new Router({
             component: () => import("@/views/CreateActivity"),
             beforeEnter: ifAuthenticated
         },
+
+        {
+            name: "create-fond",
+            path: "/create-fond",
+            component: () => import("@/views/CreateActivity"),
+            beforeEnter: ifAuthenticated
+        },
+
+
         {
             name: "user",
             path: "/user/:uid",
