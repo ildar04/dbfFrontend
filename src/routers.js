@@ -1,16 +1,15 @@
 import Vue from "vue";
 import Router from "vue-router";
-import store from "./store/store";
 
 Vue.use(Router);
 
 const ifAuthenticated = (to, from, next) => {
-    // next();
-    if (store.getters["auth/isAuth"]) {
-        next()
-    } else {
-        next("/login");
-    }
+    next();
+    // if (store.getters["auth/isAuth"]) {
+    //     next()
+    // } else {
+    //     next("/login");
+    // }
 }
 
 export default new Router({

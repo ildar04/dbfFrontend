@@ -1,11 +1,11 @@
 <template>
     <div class="activity-item">
-        <v-card class="activity-card" v-bind:class="{ loading: loading, increase: hoverIncrease, decrease: hoverDecrease }">
+        <v-card class="activity-card">
             <div class="rating-element" v-bind:class="{ opened: opened }">
-                <div class="rating" @mouseleave="clearcolor">
-                    <v-icon small class="icon increase" @mouseover="handleIncrease" @mouseleave="clearcolor" v-on:click="onIncrease">mdi-arrow-up-bold</v-icon>
-                    <span>{{item.rating.value}}</span>
-                    <v-icon small class="icon decrease" @mouseover="handleDecrease" @mouseleave="clearcolor" v-on:click="onDecrease">mdi-arrow-down-bold</v-icon>
+                <div class="rating">
+                    <v-icon small class="icon increase" v-on:click="onIncrease">mdi-arrow-up-bold</v-icon>
+                    <span>{{item.mark}}</span>
+                    <v-icon small class="icon decrease" v-on:click="onDecrease">mdi-arrow-down-bold</v-icon>
                 </div>
             </div>
             <div class="activity-card-content">
@@ -16,15 +16,11 @@
 
                     <v-expansion-panel-content>
                         {{item.description}}
-
-                        <div class="additional-info">
-                            <v-btn text small outlined>Обсудить</v-btn>
-                        </div>
                     </v-expansion-panel-content>
                 </v-expansion-panel>
 
                 <v-card-actions class="activity-actions">
-                    <div class="comments">
+                    <div class="actions-left comments">
                         <v-tooltip dark right v-if="item.commentsCount">
                             <template v-slot:activator="{ on }">
                                 <v-icon class="icon hover" v-on:click="handleOpen" v-on="on">mdi-comment-multiple-outline</v-icon>
@@ -40,8 +36,11 @@
                             <span>Right tooltip</span>
                         </v-tooltip>
                     </div>
-                    <div class="activity-datetime">
-                        {{this.activityDateTime}}
+                    <div class="actions-right">
+                        <div class="activity-datetime">
+                            {{this.activityDateTime}}
+                        </div>
+                        <v-icon class="icon hover account">mdi-account</v-icon>
                     </div>
                 </v-card-actions>
             </div>
@@ -52,6 +51,8 @@
 <script>
 
 import ActivityItemHeader from "@/components/ActivityItemHeader";
+import ActivityActions from "@/components/ActivityActions";
+import Helper from "../Helper";
 
 export default {
     props: {
@@ -73,48 +74,21 @@ export default {
 
     },
     components: {
-        ActivityItemHeader
+        ActivityItemHeader,
+        ActivityActions
     },
     methods: {
         commentsCount: function() {
             if (this.item.commentCount) {
-                this.activityDateTime = this.parseDate(this.item.addDateTime);
+                var helper = new Helper();
+                this.activityDateTime = helper.string2date(this.item.addDateTime);
                 return this.item.commentCount;
-            }
-
-            return "";
-        },
-        parseDate: function(datetime) {
-            if (datetime) {
-                var date = new Date(datetime);
-                if (date) {
-                    let datetime = [];
-                    datetime.push(date.getDate());
-                    datetime.push(date.getMonth());
-                    datetime.push(date.getFullYear());
-
-                    return datetime.join(".");
-                }
             }
 
             return "";
         },
         handleClick: function() {
             this.opened = !this.opened;
-        },
-        handleIncrease: function() {
-            setTimeout(() => {
-                this.hoverIncrease = !this.hoverIncrease
-            }, 100);
-        },
-        handleDecrease: function() {
-            setTimeout(() => {
-                this.hoverDecrease = !this.hoverDecrease
-            }, 100);
-        },
-        clearcolor: function() {
-            this.hoverIncrease = false;
-            this.hoverDecrease = false;
         },
         handleOpen: function() {
             this.$store.dispatch('activities/showDetails', this.$attrs.uid);
@@ -125,6 +99,20 @@ export default {
 </script>
 
 <style scoped>
+
+.actions-right {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.actions-right .icon {
+    border: 1px solid transparent;
+    border-radius: 50%;
+    background-color: white;
+    padding: 5px;
+    margin-left: 10px;
+}
 
 .comments-count {
     padding-left: 5px;
