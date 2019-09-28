@@ -42,7 +42,7 @@ export default {
             });
         },
         getUserById({commit}, id) {
-            API.post("api/user/" + id).then(res => {
+            API.get("api/user/" + id).then(res => {
                 let data = res.data;
                 if (data) {
                     commit('setUser', data);

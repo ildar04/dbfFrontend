@@ -55,8 +55,8 @@
         },
         data(){
             return {
-                login: '',
-                password: ''
+                login: 'Max',
+                password: '123456'
             }
         },
         methods: {

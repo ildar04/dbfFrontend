@@ -19,39 +19,36 @@
             <div class="flex-grow-1"></div>
             </v-toolbar>
             <v-card-text>
-            <v-form>
-                <v-text-field
-                    v-model="fullName"
-                    :counter="10"
-                    label="ФИО"
-                    data-vv-name="fullName"
-                    disabled
-                ></v-text-field>
-
-                <v-text-field
-                v-model="login"
-                label="Логин"
-                data-vv-name="login"
-                disabled
-                ></v-text-field>
-
-                <v-text-field
-                        v-model="about"
-                        label="О себе"
-                        data-vv-name="about"
-                        disabled
-                ></v-text-field>
-
-                {{avatarUrl}}
-
-                <v-text-field
-                        v-model="rating"
-                        label="Рейтинг"
-                        data-vv-name="rating"
-                        disabled
-                ></v-text-field>
-
-            </v-form>
+                <v-avatar>
+                    <img
+                            :src="user.avatarUrl"
+                            :alt="user.fullName"
+                    >
+                </v-avatar>
+                <v-simple-table>
+                    <template v-slot:default>
+                        <thead>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>ФИО:</td>
+                            <td>{{user.fullName}}</td>
+                        </tr>
+                        <tr>
+                            <td>Логин:</td>
+                            <td>{{user.login}}</td>
+                        </tr>
+                        <tr>
+                            <td>О себе:</td>
+                            <td>{{user.about}}</td>
+                        </tr>
+                        <tr>
+                            <td>Рейтинг:</td>
+                            <td>{{user.rating}}</td>
+                        </tr>
+                        </tbody>
+                    </template>
+                </v-simple-table>
             </v-card-text>
             <v-card-actions>
             <div class="flex-grow-1"></div>
@@ -66,6 +63,8 @@
     export default {
         name: "loginPage",
         mounted(){
+            console.log(this.$route.params);
+            this.$store.dispatch('users/getUserById', this.$route.params.uid)
         },
         data(){
             return {
@@ -91,6 +90,9 @@
         computed: {
             isAuthLocal () {
                 return this.$store.getters['auth/isAuth']
+            },
+             user() {
+                return this.$store.getters['users/user']
             }
         }
 

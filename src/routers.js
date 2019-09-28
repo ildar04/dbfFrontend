@@ -43,7 +43,7 @@ export default new Router({
         },
         {
             name: "user",
-            path: "/user",
+            path: "/user/:uid",
             component: () => import("@/views/User")
         }
     ]

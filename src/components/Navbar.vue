@@ -9,6 +9,11 @@
       <div class="flex-grow-1"></div>
       <template v-if="$vuetify.breakpoint.smAndUp">
         <v-btn depressed small color="primary" v-on:click="toCreateActivity">Создать мероприятие</v-btn>
+
+        <v-btn icon v-if="authentificated">
+          <v-icon v-on:click="handleGoToProfile">mdi-logout</v-icon>
+        </v-btn>
+
         <v-btn icon v-if="authentificated">
             <v-icon v-on:click="handleLogoutClick">mdi-logout</v-icon>
         </v-btn>
@@ -29,11 +34,19 @@ export default {
         },
         toCreateActivity() {
           this.$router.push("/create-activity")
-        }
+        },
+        handleGoToProfile() {
+          console.log("this.$route.params");
+          console.log( this.$route.params);
+          // this.$router.push({path: "/user/" + this.uid })
+        },
     },
     computed: {
         authentificated: function() {
             return this.$store.getters["auth/isAuth"];
+        },
+        uid: function() {
+          return this.$store.getters["auth/getUid"];
         }
     }
 }
