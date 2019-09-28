@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import auth from './modules/auth'
+import comments from './modules/comments'
 import activities from "./modules/activities"
 
 Vue.use(Vuex);
@@ -8,6 +9,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   modules: {
     auth,
-    activities
+    activities,
+    comments
   }
 })
