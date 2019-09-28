@@ -36,9 +36,7 @@ export default {
           this.$router.push("/create-activity")
         },
         handleGoToProfile() {
-          console.log("this.$route.params");
-          console.log( this.$route.params);
-          // this.$router.push({path: "/user/" + this.uid })
+          this.$router.push({path: "/user/" + this.uid })
         },
     },
     computed: {

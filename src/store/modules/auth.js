@@ -10,19 +10,32 @@ export default {
 
   getters: {
     isAuth(state) {
-      return state.token != null
+        return state.token != null
     },
     getUid(state) {
-      return state.uid
+        return state.uid
     }
   },
 
   mutations: {
     setToken (state, tokenLocal) {
+      localStorage.setItem('token', tokenLocal);
       state.token = tokenLocal
     },
     setUid (state, uid) {
+      localStorage.setItem('uid', uid);
       state.uid = uid;
+    },
+    initialiseStore(state) {
+
+      if(localStorage.getItem('uid')) {
+        state.uid =  localStorage.getItem('uid');
+      }
+
+      if(localStorage.getItem('token')) {
+        state.token = localStorage.getItem('token');
+      }
+
     }
   },
 
