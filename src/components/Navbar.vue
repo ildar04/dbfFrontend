@@ -8,11 +8,13 @@
 
       <div class="flex-grow-1"></div>
       <template v-if="$vuetify.breakpoint.smAndUp">
-      <v-menu offset-y  v-if="authentificated">
+      <v-menu offset-y v-if="authentificated">
           <template v-slot:activator="{ on }">
               <v-btn
                       color="success"
+                      class="create-button"
                       dark
+                      small
                       v-on="on"
               >
                   Создать
@@ -29,13 +31,20 @@
           </v-list>
       </v-menu>
 
-        <v-btn icon v-if="authentificated">
-          <v-icon v-on:click="handleGoToProfile">mdi-account-circle</v-icon>
-        </v-btn>
+    <v-menu offset-y v-if="authentificated">
+          <template v-slot:activator="{ on }">
+              <v-icon v-on="on" class="user-button">mdi-account-circle</v-icon>
+          </template>
+          <v-list>
+              <v-list-item @click="handleGoToProfile" >
+                  <v-list-item-title>Профиль</v-list-item-title>
+              </v-list-item>
 
-        <v-btn icon v-if="authentificated">
-            <v-icon v-on:click="handleLogoutClick">mdi-logout</v-icon>
-        </v-btn>
+              <v-list-item @click="handleLogoutClick" >
+                  <v-list-item-title>Выйти</v-list-item-title>
+              </v-list-item>
+          </v-list>
+      </v-menu>
       </template>
     </v-app-bar>
   </div>
@@ -78,8 +87,33 @@ export default {
 
 <style scoped>
 
+.create-button {
+    margin-right: 10px;
+}
+
+div .user-button {
+    opacity: 0.65;
+    font-size: 32px;
+}
+
+div .user-button:hover {
+    opacity: 1;
+}
+
 .title-pointer {
     cursor: pointer;
+}
+
+</style>
+
+<style>
+
+i.icon {
+    opacity: 0.65;
+}
+
+i.icon:hover {
+    opacity: 1;
 }
 
 </style>

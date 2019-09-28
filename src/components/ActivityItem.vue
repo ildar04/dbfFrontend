@@ -1,16 +1,14 @@
 <template>
     <div class="activity-item">
         <v-card class="activity-card">
-            <div class="rating-element" v-bind:class="{ opened: opened }">
-                <div class="rating">
-                    <v-icon small class="icon increase" v-on:click="onIncrease">mdi-arrow-up-bold</v-icon>
-                    <span>{{item.mark}}</span>
-                    <v-icon small class="icon decrease" v-on:click="onDecrease">mdi-arrow-down-bold</v-icon>
-                </div>
-            </div>
             <div class="activity-card-content">
                 <v-expansion-panel class="activity-item-panel">
                     <v-expansion-panel-header v-on:click="handleClick">
+                        <div class="rating">
+                            <v-icon class="icon increase prevent" @click.native.stop="onIncrease">mdi-arrow-up-bold</v-icon>
+                            <span class="mark-count">{{item.mark}}</span>
+                            <v-icon class="icon decrease prevent" @click.native.stop="onDecrease">mdi-arrow-down-bold</v-icon>
+                        </div>
                         <ActivityItemHeader :title="item.title"/>
                     </v-expansion-panel-header>
 
@@ -100,6 +98,10 @@ export default {
 
 <style scoped>
 
+.mark-count {
+    padding: 5px 0;
+}
+
 .actions-right {
     display: flex;
     align-items: center;
@@ -150,6 +152,7 @@ export default {
     transition: background-color 1s;
     min-height: 58px;
     border-bottom: 1px solid transparent;
+    padding: 10px 24px 16px 8px;
 }
 
 .rating-element {
@@ -169,15 +172,17 @@ export default {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    flex: 0;
 }
 
 .rating span {
     font-size: 14px;
 }
 
-.icon {
+.rating .icon {
     cursor: pointer;
     opacity: 0.65;
+    font-size: 24px;
 }
 
 .icon:hover {

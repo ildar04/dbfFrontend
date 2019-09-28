@@ -63,7 +63,6 @@
     export default {
         name: "loginPage",
         mounted(){
-            console.log(this.$route.params);
             this.$store.dispatch('users/getUserById', this.$route.params.uid)
         },
         data(){

@@ -39,8 +39,8 @@
             </v-card-text>
             <v-card-actions>
             <div class="flex-grow-1"></div>
-            <v-btn color="" class="mr-4" @click="switchToRegister">Регистрация</v-btn>
-            <v-btn color="primary" class="mr-4" @click="submit">Войти</v-btn>
+            <v-btn color="" class="mr-4" small @click="switchToRegister">Регистрация</v-btn>
+            <v-btn color="primary" small class="mr-4" @click="submit">Войти</v-btn>
             </v-card-actions>
         </v-card>
         </v-col>

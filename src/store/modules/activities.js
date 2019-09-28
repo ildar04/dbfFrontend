@@ -50,8 +50,9 @@ export default {
         },
         create({commit}, data) {
             API.post("api/activity", data).then(res => {
-              return true;
+              return res;
             });
+            return commit;
         },
         GetActivityDetails({commit}, payload) {
             API.get(`api/activity/${payload}`).then(res => {
