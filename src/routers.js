@@ -41,7 +41,11 @@ export default new Router({
             name: "create-activity",
             path: "/create-activity",
             component: () => import("@/views/CreateActivity")
+        },
+        {
+            name: "user",
+            path: "/user",
+            component: () => import("@/views/User")
         }
-
     ]
 });
