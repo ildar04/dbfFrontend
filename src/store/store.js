@@ -4,6 +4,7 @@ import auth from './modules/auth'
 import comments from './modules/comments'
 import activities from "./modules/activities"
 import navbar from "./modules/navbar"
+import users from "./modules/users"
 
 Vue.use(Vuex);
 
@@ -12,6 +13,7 @@ export default new Vuex.Store({
     auth,
     activities,
     comments,
-    navbar
+    navbar,
+    users
   }
 })

@@ -36,6 +36,16 @@
                                 required
                         ></v-text-field>
                         <VueCtkDateTimePicker v-model="datetime" />
+
+                        <v-select
+                                :items="listUsers"
+                                v-model="authorUids"
+                                item-text="fullName"
+                                multiple
+                                item-value="uid"
+                                label="Пользователи"
+                        ></v-select>
+
                     </v-form>
                 </v-card-text>
                 <v-card-actions>
@@ -48,13 +58,22 @@
 </template>
 <script>
   export default {
+      mounted() {
+          this.$store.dispatch('users/getUsers')
+      },
+      computed: {
+          listUsers () {
+              var value = this.$store.getters['users/list'];
+              return value;
+          }
+      },
       methods: {
           submit() {
               let data = {
                   "title": this.title,
                   "description": this.description,
                   "imageUrl": "url",
-                  "authorUids": []
+                  "authorUids": this.authorUids
               };
 
               this.$store.dispatch('activities/create', data).then((status)=> {
@@ -66,6 +85,7 @@
           return  {
               title: '',
               description: '',
+              authorUids: [],
               datetime:'2017-06-30 11:05:00',
           }
       }
