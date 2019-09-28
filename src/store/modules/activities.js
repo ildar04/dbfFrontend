@@ -38,6 +38,12 @@ export default {
                 }
             });
         },
+        create({commit}, data) {
+            API.post("api/activity", data).then(res => {
+              return true;
+            });
+        },
+
 
         showDetails({commit}, payload) {
             router.push({ path: `/activitydetails/${payload}` });

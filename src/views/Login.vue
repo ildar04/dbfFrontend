@@ -22,7 +22,6 @@
             <v-form>
                 <v-text-field
                 v-model="login"
-                :counter="10"
                 label="Логин"
                 data-vv-name="login"
                 required
@@ -36,6 +35,7 @@
                 required
                 ></v-text-field>
             </v-form>
+
             </v-card-text>
             <v-card-actions>
             <div class="flex-grow-1"></div>
