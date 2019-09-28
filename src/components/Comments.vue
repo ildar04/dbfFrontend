@@ -1,81 +1,104 @@
 <template>
-  <v-list three-line>
-    <template v-for="(item, index) in items">
-      <v-subheader
-              v-if="item.header"
-              :key="item.header"
-              v-text="item.header"
-      ></v-subheader>
-
-      <v-divider
-              v-else-if="item.divider"
-              :key="index"
-              :inset="item.inset"
-      ></v-divider>
-
+  <v-list subheader>
+    <v-subheader v-if="items && items.length" class="overline">Последние комментарии</v-subheader>
+    <v-subheader v-else class="overline">Комментарии отсутствуют</v-subheader>
+    <div v-if="items && items.length">
       <v-list-item
-              v-else
-              :key="item.title"
+        v-for="(item, index) in items"
+        :key="index"
+        class="comments-item"
       >
         <v-list-item-avatar>
-          <v-img :src="item.avatar"></v-img>
+          <v-icon class="icon hover account">mdi-account</v-icon>
         </v-list-item-avatar>
 
-        <v-list-item-content>
-          <v-list-item-title v-html="item.name"></v-list-item-title>
-          <v-list-item-subtitle v-html="item.subtitle"></v-list-item-subtitle>
+        <v-list-item-content class="comment-content">
+          <div class="comment-content-flex">
+            <span class="message body-2">{{item.text}}</span>
+            <span class="comment-date caption" style="color: rgba(0, 0, 0, 0.54)">{{item.addDateTime}}</span>
+          </div>
         </v-list-item-content>
       </v-list-item>
-    </template>
-    <v-text-field
-            :counter="10"
-            label="comments....."
-            required
-    ></v-text-field>
+    </div>
+    <div class="add-comment-container">
+        <v-text-field
+          single-line
+          hide-details
+          class="comment-text"
+          append-icon="mdi-send"
+          solo
+          placeholder="Комментарий"
+          v-model="commentdata"
+          @click:append="handleCreateComment"
+          v-on:keyup.enter="handleCreateComment"
+        >
+        </v-text-field>
+    </div>
   </v-list>
 </template>
+
 <script>
   export default {
     props: {
       title: String,
-      items: []
+      items: Array
+    },
+    data: function() {
+      return {
+        commentdata: "",
+        commentSuccess: false
+      }
+    },
+    methods: {
+      handleCreateComment() {
+        this.commentdata = "";
+      }
     }
-    // },
-    // data(){
-    //   return {
-    //     items: [
-    //       {
-    //         avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
-    //         name: 'Oleg1',
-    //         subtitle: "<span class='text--primary'>Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?",
-    //       },
-    //       { divider: true, inset: true },
-    //       {
-    //         avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
-    //         name: 'Oleg2',
-    //         subtitle: "<span class='text--primary'>to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend.",
-    //       },
-    //       { divider: true, inset: true },
-    //       {
-    //         avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
-    //         name: 'Oleg3',
-    //         subtitle: "<span class='text--primary'>Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?",
-    //       },
-    //       { divider: true, inset: true },
-    //       {
-    //         avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
-    //         name: 'Oleg4',
-    //         subtitle: "<span class='text--primary'>Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?",
-    //       },
-    //       { divider: true, inset: true },
-    //       {
-    //         avatar: 'https://cdn.vuetifyjs.com/images/lists/5.jpg',
-    //         name: 'Oleg5',
-    //         subtitle: "<span class='text--primary'>Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos.",
-    //       },
-    //     ]
-    //   }
-    // }
-
   }
 </script>
+
+<style>
+
+.comment-added {
+  visibility: hidden;
+}
+
+div .commentSuccess {
+  visibility: visible;
+}
+
+.comment-text .v-icon {
+  cursor: pointer;
+}
+
+.commentSuccess {
+  visibility: hidden;
+}
+
+</style>
+
+<style scoped>
+
+.add-comment-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-end;
+    padding: 15px 16px 0px;
+}
+
+.comment-content-flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.comment-date {
+    min-width: 110px;
+    white-space: nowrap;
+}
+
+.comments-item:not(:last-of-type) .comment-content {
+    border-bottom: 1px solid #e9e9e9;
+}
+
+</style>

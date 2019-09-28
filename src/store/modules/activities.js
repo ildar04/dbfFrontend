@@ -1,4 +1,5 @@
 import API from "@/api";
+import Helper from "@/Helper";
 import router from "../../routers";
 
 export default {
@@ -56,6 +57,14 @@ export default {
             API.get(`api/activity/${payload}`).then(res => {
                 let data = res.data;
                 if (data) {
+                    const helper = new Helper();
+                    data.addDateTime = helper.string2date(data.addDateTime, true);
+                    if (data.comments) {
+                        for (var i = 0; i < data.comments.length; i++) {
+                            let item = data.comments[i];
+                            item.addDateTime = helper.string2date(item.addDateTime, true);
+                        }
+                    }
                     commit('setDetailedItems', data);
                 }
             }).catch(ex => {

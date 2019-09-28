@@ -23,7 +23,7 @@
             </v-card-text>
 
             <Comments 
-                
+                :items="currentItem.comments"
             />
         </v-card>
     </div>
@@ -48,14 +48,7 @@ export default {
     },
     computed: {
         currentItem: function() {
-            var value = this.$store.getters['activities/getDetailedItems'];
-            if (value) {
-                var helper = new Helper();
-                if (value.addDateTime) {
-                    value.addDateTime = helper.string2date(value.addDateTime);
-                }
-            }
-            return value;
+            return this.$store.getters['activities/getDetailedItems'];
         }
     }
 }

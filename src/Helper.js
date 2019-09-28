@@ -2,7 +2,7 @@
 class Helper
 {
 
-    string2date(string) {
+    string2date(string, withMinutes) {
         if (string) {
             var date = new Date(string);
             if (date) {
@@ -10,6 +10,14 @@ class Helper
                 datetime.push(date.getDate());
                 datetime.push(date.getMonth());
                 datetime.push(date.getFullYear());
+                if (withMinutes) {
+                    var time = [];
+                    time.push(date.getHours());
+                    time.push(date.getMinutes());
+                    time.push(date.getSeconds());
+
+                    return `${datetime.join(".")} ${time.join(":")}`;
+                }
 
                 return datetime.join(".");
             }
