@@ -6,6 +6,9 @@
             :key="i"
             :item="item"
             :loading="loading"
+            :onIncrease="handleIncrease"
+            :onDecrease="handleDecrease"
+            :uid="item.activity.uid"
         />
   </v-expansion-panels>
 </template>
@@ -37,7 +40,21 @@ export default {
     },
     computed: {
         currentItems () {
-            return this.$store.getters['activities/getItems']
+            var value = this.$store.getters['activities/getItems'];
+            return value;
+        }
+    },
+    methods: {
+        handleDecrease: function(sender) {
+            //todo sender.uid - идентификатор пользователя
+            return sender;
+        },
+        handleIncrease: function(sender) {
+            //todo sender.uid - идентификатор пользователя
+            return sender;
+        },
+        uidGetter: function() {
+            return this.uid;
         }
     }
 };

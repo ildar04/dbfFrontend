@@ -1,27 +1,48 @@
 <template>
-    <v-row>
+    <v-row
+        align="center"
+        justify="center"
+        class="form-style"
+    >
         <v-col
-            :cols="4"
-            offset-md="4"
-            class="verticallyCenter"
+        cols="12"
+        sm="8"
+        md="4"
         >
-            <form>
+        <v-card class="elevation-12">
+            <v-toolbar
+            color="primary"
+            dark
+            flat
+            >
+            <v-toolbar-title>Авторизация</v-toolbar-title>
+            <div class="flex-grow-1"></div>
+            </v-toolbar>
+            <v-card-text>
+            <v-form>
                 <v-text-field
-                        v-model="login"
-                        :counter="10"
-                        label="Логин"
-                        data-vv-name="login"
-                        required
+                v-model="login"
+                :counter="10"
+                label="Логин"
+                data-vv-name="login"
+                required
                 ></v-text-field>
+
                 <v-text-field
-                        v-model="password"
-                        label="Пароль"
-                        type="password"
-                        data-vv-name="password"
-                        required
+                v-model="password"
+                label="Пароль"
+                type="password"
+                data-vv-name="password"
+                required
                 ></v-text-field>
-                <v-btn class="mr-4" @click="submit">Войти</v-btn>
-            </form>
+            </v-form>
+            </v-card-text>
+            <v-card-actions>
+            <div class="flex-grow-1"></div>
+            <v-btn color="" class="mr-4" @click="switchToRegister">Регистрация</v-btn>
+            <v-btn color="primary" class="mr-4" @click="submit">Войти</v-btn>
+            </v-card-actions>
+        </v-card>
         </v-col>
     </v-row>
 </template>
@@ -30,8 +51,7 @@
     export default {
         name: "loginPage",
         mounted(){
-            // console.log('created login component');
-            // console.log(this.$store.getters['cart/test']);
+
         },
         data(){
             return {
@@ -43,14 +63,12 @@
             submit() {
                 this.$store.dispatch('auth/login', {login: this.login, password: this.password}).then((data)=> {
                     if(data) {
-                        console.log("isAuthLocal");
-                        console.log(this.isAuthLocal);
-
                         this.$router.push('/')
                     }
                 });
-
-                console.log('submit');
+            },
+            switchToRegister() {
+                this.$router.push("/registration");
             }
         },
 

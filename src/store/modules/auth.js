@@ -25,6 +25,11 @@ export default {
     },
     registration() {
       return true
-    }
+    },
+    LogOut({commit}) {
+      commit('setToken', undefined);
+
+      return true;
+  }
   }
 }
