@@ -12,11 +12,13 @@ Vue.component('VueCtkDateTimePicker', VueCtkDateTimePicker);
 Vue.config.productionTip = false
 
 new Vue({
+    beforeCreate() {
+        this.$store.commit('auth/initialiseStore');
+    },
   vuetify,
   store,
+
   router,
-  beforeCreate() {
-    this.$store.commit('auth/initialiseStore');
-  },
+
   render: h => h(App)
 }).$mount('#app')

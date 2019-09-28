@@ -7,11 +7,16 @@ Vue.use(Router);
 const ifAuthenticated = (to, from, next) => {
     // next();
 
-    if (store.getters["auth/isAuth"]) {
+    if(localStorage.getItem('token') !== null && localStorage.getItem('token')!== undefined) {
         next()
-    } else {
+    }else {
         next("/login");
     }
+    // if(store.getters["auth/isAuth"]) {
+    //     // next()
+    // } else {
+    //     next("/login");
+    // }
 }
 
 export default new Router({

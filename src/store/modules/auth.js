@@ -27,6 +27,7 @@ export default {
       state.uid = uid;
     },
     initialiseStore(state) {
+        console.log("initialiseStore");
 
       if(localStorage.getItem('uid')) {
         state.uid =  localStorage.getItem('uid');
@@ -35,7 +36,6 @@ export default {
       if(localStorage.getItem('token')) {
         state.token = localStorage.getItem('token');
       }
-
     }
   },
 
