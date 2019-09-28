@@ -1,15 +1,17 @@
 import Vue from "vue";
 import Router from "vue-router";
+import store from './store/store'
 
 Vue.use(Router);
 
 const ifAuthenticated = (to, from, next) => {
-    next();
-    // if (store.getters["auth/isAuth"]) {
-    //     next()
-    // } else {
-    //     next("/login");
-    // }
+    // next();
+
+    if (store.getters["auth/isAuth"]) {
+        next()
+    } else {
+        next("/login");
+    }
 }
 
 export default new Router({
@@ -39,12 +41,14 @@ export default new Router({
         {
             name: "create-activity",
             path: "/create-activity",
-            component: () => import("@/views/CreateActivity")
+            component: () => import("@/views/CreateActivity"),
+            beforeEnter: ifAuthenticated
         },
         {
             name: "user",
             path: "/user/:uid",
-            component: () => import("@/views/User")
+            component: () => import("@/views/User"),
+            beforeEnter: ifAuthenticated
         }
     ]
 });

@@ -8,7 +8,7 @@
 
       <div class="flex-grow-1"></div>
       <template v-if="$vuetify.breakpoint.smAndUp">
-        <v-btn depressed small color="primary" v-on:click="toCreateActivity">Создать мероприятие</v-btn>
+        <v-btn depressed small color="primary" v-if="authentificated" v-on:click="toCreateActivity">Создать мероприятие</v-btn>
 
         <v-btn icon v-if="authentificated">
           <v-icon v-on:click="handleGoToProfile">mdi-account-circle</v-icon>
