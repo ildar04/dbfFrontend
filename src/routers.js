@@ -5,6 +5,7 @@ import store from "./store/store";
 Vue.use(Router);
 
 const ifAuthenticated = (to, from, next) => {
+    // next();
     if (store.getters["auth/isAuth"]) {
         next()
     } else {

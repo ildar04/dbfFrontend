@@ -8,7 +8,6 @@
             :loading="loading"
             :onIncrease="handleIncrease"
             :onDecrease="handleDecrease"
-            :uid="item.activity.uid"
         />
   </v-expansion-panels>
 </template>

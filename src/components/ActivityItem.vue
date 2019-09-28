@@ -4,18 +4,18 @@
             <div class="rating-element" v-bind:class="{ opened: opened }">
                 <div class="rating" @mouseleave="clearcolor">
                     <v-icon small class="icon increase" @mouseover="handleIncrease" @mouseleave="clearcolor" v-on:click="onIncrease">mdi-arrow-up-bold</v-icon>
-                    <span>{{item.activity.rating.value}}</span>
+                    <span>{{item.rating.value}}</span>
                     <v-icon small class="icon decrease" @mouseover="handleDecrease" @mouseleave="clearcolor" v-on:click="onDecrease">mdi-arrow-down-bold</v-icon>
                 </div>
             </div>
             <div class="activity-card-content">
                 <v-expansion-panel class="activity-item-panel">
                     <v-expansion-panel-header v-on:click="handleClick">
-                        <ActivityItemHeader :title="item.activity.title"/>
+                        <ActivityItemHeader :title="item.title"/>
                     </v-expansion-panel-header>
 
                     <v-expansion-panel-content>
-                        {{item.activity.description}}
+                        {{item.description}}
 
                         <div class="additional-info">
                             <v-btn text small outlined>Обсудить</v-btn>
@@ -25,7 +25,7 @@
 
                 <v-card-actions class="activity-actions">
                     <div class="comments">
-                        <v-tooltip dark right v-if="this.item.comment && this.item.comment.length !== 0">
+                        <v-tooltip dark right v-if="item.commentsCount">
                             <template v-slot:activator="{ on }">
                                 <v-icon class="icon hover" v-on:click="handleOpen" v-on="on">mdi-comment-multiple-outline</v-icon>
                                 <span class="comments-count">{{commentsCount()}}</span>
@@ -39,9 +39,6 @@
                             </template>
                             <span>Right tooltip</span>
                         </v-tooltip>
-                        <!-- <v-icon v-if="this.item.comment && this.item.comment.length !== 0" class="icon hover" v-on:click="handleOpen">mdi-comment-multiple-outline</v-icon>
-                        <v-icon v-else class="icon hover" v-on:click="handleOpen">mdi-comment-outline</v-icon>
-                        <span class="comments-count">{{commentsCount()}}</span> -->
                     </div>
                     <div class="activity-datetime">
                         {{this.activityDateTime}}
@@ -80,16 +77,16 @@ export default {
     },
     methods: {
         commentsCount: function() {
-            if (this.item.comment && this.item.comment.length) {
-                this.activityDateTime = this.parseDate(this.item.activity);
-                return this.item.comment.length;
+            if (this.item.commentCount) {
+                this.activityDateTime = this.parseDate(this.item.addDateTime);
+                return this.item.commentCount;
             }
 
             return "";
         },
-        parseDate: function(activity) {
-            if (activity && activity.addDateTime) {
-                var date = new Date(activity.addDateTime);
+        parseDate: function(datetime) {
+            if (datetime) {
+                var date = new Date(datetime);
                 if (date) {
                     let datetime = [];
                     datetime.push(date.getDate());
