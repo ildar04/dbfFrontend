@@ -38,10 +38,13 @@
 </template>
 
 <script>
+  import API from "@/api";
+
   export default {
     props: {
       title: String,
-      items: Array
+      items: Array,
+      activityId: String
     },
     data: function() {
       return {
@@ -51,9 +54,21 @@
     },
     methods: {
       handleCreateComment() {
+        API.post("api/activity/comment", {
+          "entityUid": this.activityId,
+          "authorUid": this.uid,
+          "text": this.commentdata
+        }).then(res => {
+          this.items = res.data;
+        });
         this.commentdata = "";
       }
-    }
+    },
+    computed: {
+          uid () {
+              return this.$store.getters['auth/getUid'];
+          }
+      },
   }
 </script>
 
