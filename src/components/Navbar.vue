@@ -4,7 +4,7 @@
       color="white"
       dense
     >
-      <v-toolbar-title v-on:click="handleTitleClick" class="title-pointer">S0M3N4M3</v-toolbar-title>
+      <v-toolbar-title v-on:click="handleTitleClick" class="title-pointer">VOLUNTEERY</v-toolbar-title>
 
       <div class="flex-grow-1"></div>
       <template v-if="$vuetify.breakpoint.smAndUp">

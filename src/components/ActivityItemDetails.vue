@@ -23,6 +23,7 @@
             </v-card-text>
 
             <Comments 
+                :activityId="id"
                 :items="currentItem.comments"
             />
         </v-card>
