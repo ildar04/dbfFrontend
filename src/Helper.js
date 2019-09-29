@@ -13,8 +13,8 @@ class Helper
                 if (withMinutes) {
                     var time = [];
                     time.push(date.getHours());
-                    time.push(date.getMinutes());
-                    time.push(date.getSeconds());
+                    time.push((date.getMinutes() < 10 ? '0' : '') + date.getMinutes());
+                    time.push((date.getSeconds() < 10 ? '0' : '') + date.getSeconds());
 
                     return `${datetime.join(".")} ${time.join(":")}`;
                 }

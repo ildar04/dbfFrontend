@@ -18,7 +18,7 @@ export default {
         },
 
         ToLogin() {
-            router.push({ path: "login"})
+            router.push({ path: "/login"})
         }
     }
   }

@@ -54,14 +54,18 @@
     },
     methods: {
       handleCreateComment() {
-        API.post("api/activity/comment", {
-          "entityUid": this.activityId,
-          "authorUid": this.uid,
-          "text": this.commentdata
-        }).then(res => {
-          this.items = res.data;
+        debugger;
+        const model = {
+          entityUid: this.activityId,
+          authorUid: this.uid,
+          text: this.commentdata
+        };
+        this.$store.dispatch("comments/addComment", model).then(data => {
+            if (data) {
+              this.items = data;
+              this.commentdata = "";
+            }
         });
-        this.commentdata = "";
       }
     },
     computed: {
