@@ -18,10 +18,18 @@
                     </div>
                 </div>
             </v-card-title>
-            <v-card-text class="card-details-content">
-                {{extendedItem.description}}
-            </v-card-text>
-
+            <div>
+                <img v-bind:src="extendedItem.pictureUrl" class="content-image"/>
+                <v-card-text class="card-details-content" v-html="extendedItem.description" />
+            </div>
+            <div v-if="extendedItem.tags.length !== 0" class="tags-container">
+                <v-chip v-for="(item, i) in extendedItem.tags"
+                    v-bind:key="i"
+                    small
+                >
+                    {{item.name}}
+                </v-chip>
+            </div>
             <Comments 
                 :activityId="id"
                 :items="extendedItem.comments"
@@ -40,7 +48,11 @@ export default {
     },
     data: function() {
         return {
-            extendedItem: {}
+            extendedItem: {
+                tags: {
+                    length: []
+                }
+            }
         }
     },
     components: {
@@ -49,6 +61,7 @@ export default {
     created: function() {
         this.$store.dispatch('activities/GetActivityDetails', this.id).then(res => {
             this.extendedItem = res;
+            debugger;
         });
     },
     computed: {
@@ -64,6 +77,20 @@ export default {
         display: flex;
         width: 100%;
         justify-content: space-between;
+    }
+
+    .content-image {
+        padding: 18px;
+        max-width: 600px;
+        max-height: 400px;
+    }
+
+    .tags-container {
+        padding-left: 10px;
+    }
+
+    .tags-container .v-chip {
+        margin-right: 10px;
     }
 
     .card-details {
