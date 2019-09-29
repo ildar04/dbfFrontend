@@ -57,7 +57,8 @@ export default {
                 }
             });
         },
-        activityLike({commit}, payload) {
+        activityAction({commit}, payload) {
+            debugger;
             return API.post("api/Marks", payload).then(res => {
                 commit('setMarks', {
                     activity: payload.entityUid,
