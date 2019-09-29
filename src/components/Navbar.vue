@@ -9,7 +9,7 @@
             Мероприятия
         </v-tab>
         <v-tab v-on:click="goToFundList">
-            Фонды
+            Фонд
         </v-tab>
 
       <div class="flex-grow-1"></div>
