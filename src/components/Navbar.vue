@@ -9,7 +9,7 @@
             Мероприятия
         </v-tab>
         <v-tab v-on:click="goToFundList">
-            Фонд
+            Фонды
         </v-tab>
 
       <div class="flex-grow-1"></div>
@@ -32,7 +32,7 @@
               </v-list-item>
 
               <v-list-item @click="toCreateFund">
-                  <v-list-item-title>Фонды </v-list-item-title>
+                  <v-list-item-title>Фонд </v-list-item-title>
               </v-list-item>
           </v-list>
       </v-menu>
