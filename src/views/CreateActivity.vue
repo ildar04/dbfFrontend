@@ -91,7 +91,7 @@
               };
 
               this.$store.dispatch('activities/create', data).then((status)=> {
-                  this.$router.push('/');
+                  this.$router.push('/activities');
                   return status;
               });
           },

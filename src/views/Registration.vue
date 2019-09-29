@@ -78,7 +78,7 @@
             submit() {
                 this.$store.dispatch('auth/registration', {fullName: this.fullName, login: this.login, password: this.password}).then((data)=> {
                     if(data) {
-                        this.$router.push('/')
+                        this.$router.push('/activities')
                     }
                 });
             },
