@@ -8,7 +8,8 @@ export default {
     state: {
         currentActivityUid: "",
         items: [],
-        detailedItems: {}
+        detailedItems: {},
+        marks: {}
     },
   
     getters: {
@@ -22,6 +23,10 @@ export default {
 
       getDetailedItems(state) {
           return state.detailedItems;
+      },
+
+      getMarks(state) {
+          return state.marks;
       }
     },
   
@@ -36,6 +41,10 @@ export default {
 
       setActivity(state, activityUid) {
           state.currentActivityUid = activityUid;
+      },
+
+      setMarks(state, payload) {
+          state.marks[payload.activity] = payload.marks;
       }
     },
   
@@ -46,6 +55,17 @@ export default {
                 if (data) {
                     commit('setItems', data);
                 }
+            });
+        },
+        activityLike({commit}, payload) {
+            return API.post("api/Marks", payload).then(res => {
+                commit('setMarks', {
+                    activity: payload.entityUid,
+                    marks: res.data
+                });
+                return res;
+            }).catch(err => {
+                return err;
             });
         },
         create({commit}, data) {

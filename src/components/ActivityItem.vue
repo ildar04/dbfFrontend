@@ -6,7 +6,7 @@
                     <v-expansion-panel-header v-on:click="handleClick">
                         <div class="rating">
                             <v-icon class="icon increase prevent" @click.native.stop="onIncrease">mdi-arrow-up-bold</v-icon>
-                            <span class="mark-count">{{item.mark}}</span>
+                            <span class="mark-count">{{marks}}</span>
                             <v-icon class="icon decrease prevent" @click.native.stop="onDecrease">mdi-arrow-down-bold</v-icon>
                         </div>
                         <ActivityItemHeader :title="item.title"/>
@@ -19,17 +19,17 @@
 
                 <v-card-actions class="activity-actions">
                     <div class="actions-left comments">
-                        <v-tooltip dark right v-if="item.commentsCount">
+                        <v-tooltip dark right v-if="commentsCount !== 0">
                             <template v-slot:activator="{ on }">
                                 <v-icon class="icon hover" v-on:click="handleOpen" v-on="on">mdi-comment-multiple-outline</v-icon>
-                                <span class="comments-count">{{commentsCount()}}</span>
+                                <span class="comments-count">{{commentsCount}}</span>
                             </template>
                             <span>Left tooltip</span>
                         </v-tooltip>
                         <v-tooltip dark right v-else>
                             <template v-slot:activator="{ on }">
                                 <v-icon class="icon hover" v-on:click="handleOpen">mdi-comment-outline</v-icon>
-                                <span class="comments-count">{{commentsCount()}}</span>
+                                <span class="comments-count">{{commentsCount}}</span>
                             </template>
                             <span>Right tooltip</span>
                         </v-tooltip>
@@ -49,15 +49,11 @@
 <script>
 
 import ActivityItemHeader from "@/components/ActivityItemHeader";
-import ActivityActions from "@/components/ActivityActions";
-import Helper from "../Helper";
 
 export default {
     props: {
         item: Object,
         loading: Boolean,
-        onIncrease: Function,
-        onDecrease: Function,
         onOpen: Function
     },
     data() {
@@ -65,31 +61,41 @@ export default {
             opened: false,
             hoverIncrease: false,
             hoverDecrease: false,
-            activityDateTime: ""
+            activityDateTime: "",
+            commentsCount: 0,
+            marks: 0
         }
     },
-    computed: {
-
+    created() {
+        this.commentsCount = this.item.commentsCount;
+        this.marks = this.item.mark;
     },
     components: {
-        ActivityItemHeader,
-        ActivityActions
+        ActivityItemHeader
     },
     methods: {
-        commentsCount: function() {
-            if (this.item.commentCount) {
-                var helper = new Helper();
-                this.activityDateTime = helper.string2date(this.item.addDateTime);
-                return this.item.commentCount;
-            }
-
-            return "";
-        },
         handleClick: function() {
             this.opened = !this.opened;
         },
         handleOpen: function() {
             this.$store.dispatch('activities/showDetails', this.$attrs.uid);
+        },
+        onIncrease: function() {
+            this.$store.dispatch("activities/activityLike", this.createDTO(true)).then(res => {
+                this.marks = res.data;
+            });
+        },
+        onDecrease: function() {
+            this.$store.dispatch("activities/activityLike", this.createDTO(false)).then(res => {
+                this.marks = res.data;
+            });
+        },
+        createDTO: function(flagValue) {
+            return {
+                entityUid: this.$attrs.uid,
+                userUid: this.$store.getters["auth/getUid"],
+                flag: flagValue
+            };
         }
     }
 }
@@ -149,8 +155,6 @@ export default {
 
 .v-expansion-panels .v-expansion-panel-header,
 .v-expansion-panel--active .v-expansion-panel-header {
-    transition: background-color 1s;
-    min-height: 58px;
     border-bottom: 1px solid transparent;
     padding: 10px 24px 16px 8px;
 }
@@ -173,6 +177,7 @@ export default {
     justify-content: space-between;
     align-items: center;
     flex: 0;
+    padding-right: 10px;
 }
 
 .rating span {

@@ -78,6 +78,7 @@
 
               this.$store.dispatch('activities/create', data).then((status)=> {
                   this.$router.push('/');
+                  return status;
               });
           }
       },

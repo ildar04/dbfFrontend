@@ -31,8 +31,6 @@
 </template>
 
 <script>
-import ActivityItemHeader from "@/components/ActivityItemHeader";
-import Helper from "../Helper";
 import Comments from "@/components/Comments";
 
 export default {
@@ -40,7 +38,6 @@ export default {
         id: String,
     },
     components: {
-        ActivityItemHeader,
         Comments
     },
     created: function() {
