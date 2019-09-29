@@ -5,9 +5,9 @@
                 <v-expansion-panel class="activity-item-panel">
                     <v-expansion-panel-header v-on:click="handleClick">
                         <div class="rating">
-                            <v-icon class="icon increase prevent" @click.native.stop="onIncrease">mdi-arrow-up-bold</v-icon>
+                            <v-icon increase class="icon increase prevent" @click.native.stop="onClickRating">mdi-arrow-up-bold</v-icon>
                             <span class="mark-count">{{marks}}</span>
-                            <v-icon class="icon decrease prevent" @click.native.stop="onDecrease">mdi-arrow-down-bold</v-icon>
+                            <v-icon decrease class="icon decrease prevent" @click.native.stop="onClickRating">mdi-arrow-down-bold</v-icon>
                         </div>
                         <ActivityItemHeader :title="item.title"/>
                     </v-expansion-panel-header>
@@ -24,14 +24,14 @@
                                 <v-icon class="icon hover" v-on:click="handleOpen" v-on="on">mdi-comment-multiple-outline</v-icon>
                                 <span class="comments-count">{{commentsCount}}</span>
                             </template>
-                            <span>Left tooltip</span>
+                            <span>К расширенному просмотру</span>
                         </v-tooltip>
                         <v-tooltip dark right v-else>
                             <template v-slot:activator="{ on }">
                                 <v-icon class="icon hover" v-on:click="handleOpen">mdi-comment-outline</v-icon>
                                 <span class="comments-count">{{commentsCount}}</span>
                             </template>
-                            <span>Right tooltip</span>
+                            <span>К расширенному просмотру</span>
                         </v-tooltip>
                     </div>
                     <div class="actions-right">
@@ -80,13 +80,8 @@ export default {
         handleOpen: function() {
             this.$store.dispatch('activities/showDetails', this.$attrs.uid);
         },
-        onIncrease: function() {
-            this.$store.dispatch("activities/activityLike", this.createDTO(true)).then(res => {
-                this.marks = res.data;
-            });
-        },
-        onDecrease: function() {
-            this.$store.dispatch("activities/activityLike", this.createDTO(false)).then(res => {
+        onClickRating: function(e) {
+            this.$store.dispatch("activities/activityAction", this.createDTO(e.target.hasAttribute('increase'))).then(res => {
                 this.marks = res.data;
             });
         },

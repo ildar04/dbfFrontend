@@ -57,7 +57,7 @@ export default {
                 }
             });
         },
-        activityLike({commit}, payload) {
+        activityAction({commit}, payload) {
             return API.post("api/Marks", payload).then(res => {
                 commit('setMarks', {
                     activity: payload.entityUid,

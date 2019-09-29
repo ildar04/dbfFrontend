@@ -25,11 +25,10 @@ export default {
         },
 
         ToLogin() {
-            router.push({ path: "login"})
+            router.push({ path: "/login"})
         },
-
         setTab ({commit}, tab) {
-                commit('setTab', tab);
+            commit('setTab', tab);
         }
     }
   }
