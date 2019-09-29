@@ -4,7 +4,13 @@
       color="white"
       dense
     >
-      <v-toolbar-title v-on:click="handleTitleClick" class="title-pointer">VOLUNTEERY</v-toolbar-title>
+        <v-toolbar-title v-on:click="handleTitleClick" class="title-pointer">VOLUNTEERY</v-toolbar-title>
+        <v-tab  v-on:click="goToActivityList">
+            Мероприятия
+        </v-tab>
+        <v-tab v-on:click="goToFundList">
+            Фонды
+        </v-tab>
 
       <div class="flex-grow-1"></div>
       <template v-if="$vuetify.breakpoint.smAndUp">
@@ -22,11 +28,11 @@
           </template>
           <v-list>
               <v-list-item @click="toCreateActivity" >
-                  <v-list-item-title>Мероприятие</v-list-item-title>
+                  <v-list-item-title>Мероприятие </v-list-item-title>
               </v-list-item>
 
-              <v-list-item @click="toCreateFond" >
-                  <v-list-item-title>Фонды</v-list-item-title>
+              <v-list-item @click="toCreateFund">
+                  <v-list-item-title>Фонды </v-list-item-title>
               </v-list-item>
           </v-list>
       </v-menu>
@@ -66,12 +72,19 @@ export default {
         toCreateActivity() {
           this.$router.push("/create-activity")
         },
-        toCreateFond() {
-            this.$router.push("/create-fond")
+        toCreateFund() {
+            this.$router.push("/create-fund")
         },
         handleGoToProfile() {
           this.$router.push({path: "/user/" + this.uid })
         },
+        goToActivityList() {
+            this.$router.push({path: "/activitys" })
+        },
+
+        goToFundList() {
+            this.$router.push({path: "/fund" })
+        }
     },
     computed: {
         authentificated: function() {
@@ -80,6 +93,14 @@ export default {
         uid: function() {
           return this.$store.getters["auth/getUid"];
         }
+    },
+    mounted() {
+
+       //  this.$router.beforeEach((to, from, next) => {
+       // console.log("to")
+       // console.log(to)
+       //  })
+
     }
 }
 

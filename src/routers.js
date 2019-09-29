@@ -24,8 +24,13 @@ const ifAuthenticated = (to, from, next) => {
 export default new Router({
     routes: [
         {
-            path: "/",
-            component: () => import("@/views/Home"),
+            path: "/activitys",
+            component: () => import("@/views/Activity"),
+            beforeEnter: ifAuthenticated
+        },
+        {
+            path: "/fund",
+            component: () => import("@/views/Fund"),
             beforeEnter: ifAuthenticated
         },
         {
@@ -51,15 +56,12 @@ export default new Router({
             component: () => import("@/views/CreateActivity"),
             beforeEnter: ifAuthenticated
         },
-
         {
-            name: "create-fond",
-            path: "/create-fond",
-            component: () => import("@/views/CreateActivity"),
+            name: "create-fund",
+            path: "/create-fund",
+            component: () => import("@/views/CreateFund"),
             beforeEnter: ifAuthenticated
         },
-
-
         {
             name: "user",
             path: "/user/:uid",

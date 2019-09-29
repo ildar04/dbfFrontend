@@ -36,8 +36,15 @@
                                 required
                         ></v-text-field>
 
-                        <VueCtkDateTimePicker v-model="budget_start"/>
-                        <VueCtkDateTimePicker v-model="budget_target"/>
+                        <VueCtkDateTimePicker label="Дата начала мероприятия"  style="margin-top: 10px" v-model="startDate"/>
+                        <VueCtkDateTimePicker  label="Дата окончания мероприятия" style="margin-top: 15px; margin-bottom: 20px" v-model="endDate"/>
+
+                        <v-text-field
+                                v-model="budget"
+                                hide-details
+                                type="number"
+                                label="Бюджет"
+                        />
 
                         <v-select
                                 :items="listUsers"
@@ -67,19 +74,26 @@
           listUsers () {
               var value = this.$store.getters['users/list'];
               return value;
+          },
+          uid () {
+              return this.$store.getters['auth/getUid'];
           }
       },
       methods: {
           submit() {
-              let data = {
+              const data = {
+                  "uid": this.uid,
                   "title": this.title,
                   "description": this.description,
-                  "imageUrl": "url",
-                  "authorUids": this.authorUids
-              };
+                  "budget": this.budget,
+                  "startDate": this.startDate,
+                  "endDate": this.endDate
+              }
 
-              this.$store.dispatch('activities/create', data).then((status)=> {
-                  this.$router.push('/');
+              // console.log(data);
+
+              this.$store.dispatch('fund/createFund', data).then((status)=> {
+              //     // this.$router.push('/');
               });
           }
       },
@@ -88,7 +102,9 @@
               title: '',
               description: '',
               authorUids: [],
-              datetime:'2017-06-30 11:05:00',
+              endDate:'2017-06-30 11:05:00',
+              startDate:'2017-06-30 11:05:00',
+              budget: 0,
           }
       }
   }
