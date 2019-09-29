@@ -5,7 +5,7 @@
       dense
     >
         <v-toolbar-title v-on:click="handleTitleClick" class="title-pointer">VOLUNTEERY</v-toolbar-title>
-        <v-tab  v-on:click="goToActivityList">
+        <v-tab  v-on:click="goToActivityList" >
             Мероприятия
         </v-tab>
         <v-tab v-on:click="goToFundList">
@@ -28,7 +28,7 @@
           </template>
           <v-list>
               <v-list-item @click="toCreateActivity" >
-                  <v-list-item-title>Мероприятие </v-list-item-title>
+                  <v-list-item-title>Мероприятие</v-list-item-title>
               </v-list-item>
 
               <v-list-item @click="toCreateFund">
@@ -78,12 +78,15 @@ export default {
         handleGoToProfile() {
           this.$router.push({path: "/user/" + this.uid })
         },
+
         goToActivityList() {
             this.$router.push({path: "/activitys" })
+            this.$store.dispatch('navbar/setTab', '/activitys');
         },
 
         goToFundList() {
             this.$router.push({path: "/fund" })
+            this.$store.dispatch('navbar/setTab', '/fund');
         }
     },
     computed: {
@@ -92,6 +95,10 @@ export default {
         },
         uid: function() {
           return this.$store.getters["auth/getUid"];
+        },
+        currTab: function() {
+            // console.log(this.$store.getters["navbar/getCurrTab"]);
+            return this.$store.getters["navbar/getCurrTab"];
         }
     },
     mounted() {

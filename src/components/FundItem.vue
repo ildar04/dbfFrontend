@@ -4,11 +4,6 @@
             <div class="activity-card-content">
                 <v-expansion-panel class="activity-item-panel">
                     <v-expansion-panel-header v-on:click="handleClick">
-                        <div class="rating">
-                            <v-icon class="icon increase prevent" @click.native.stop="onIncrease">mdi-arrow-up-bold</v-icon>
-                            <span class="mark-count">{{item.mark}}</span>
-                            <v-icon class="icon decrease prevent" @click.native.stop="onDecrease">mdi-arrow-down-bold</v-icon>
-                        </div>
                         <ActivityItemHeader :title="item.title"/>
                     </v-expansion-panel-header>
 
@@ -92,7 +87,7 @@ export default {
             this.opened = !this.opened;
         },
         handleOpen: function() {
-            this.$store.dispatch('activities/showDetails', this.$attrs.uid);
+            this.$store.dispatch('fund/showDetails', this.$attrs.uid);
         }
     }
 }

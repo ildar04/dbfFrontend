@@ -41,6 +41,13 @@ export default new Router({
             beforeEnter: ifAuthenticated
         },
         {
+            name: "funddetails",
+            path: "/funddetails/:id",
+            component: () => import("@/views/FundDetails"),
+            props: true,
+            beforeEnter: ifAuthenticated
+        },
+        {
             name: "login",
             path: "/login",
             component: () => import("@/views/Login")
