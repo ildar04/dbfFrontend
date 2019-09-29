@@ -37,7 +37,7 @@
                         <div class="activity-datetime">
                             {{this.activityDateTime}}
                         </div>
-                        <v-icon class="icon hover account">mdi-account</v-icon>
+                        <v-icon class="icon hover account" v-on:click="showUser">mdi-account</v-icon>
                     </div>
                 </v-card-actions>
             </div>
@@ -88,6 +88,9 @@ export default {
         },
         handleOpen: function() {
             this.$store.dispatch('fund/showDetails', this.$attrs.uid);
+        },
+        showUser: function() {
+            this.$router.push({path: "/user/" + this.item.authorUid });
         }
     }
 }

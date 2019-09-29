@@ -40,12 +40,12 @@
                         <VueCtkDateTimePicker label="Дата начала мероприятия"  style="margin-top: 10px" v-model="startDate"/>
                         <VueCtkDateTimePicker  label="Дата окончания мероприятия" style="margin-top: 15px; margin-bottom: 20px" v-model="endDate"/>
 
-                        <v-text-field
-                                v-model="budget"
-                                hide-details
-                                type="number"
-                                label="Бюджет"
-                        />
+<!--                        <v-text-field-->
+<!--                                v-model="budget"-->
+<!--                                hide-details-->
+<!--                                type="number"-->
+<!--                                label="Бюджет"-->
+<!--                        />-->
 
                         <v-select
                                 :items="listUsers"
