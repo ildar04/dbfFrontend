@@ -18,6 +18,7 @@
                 >
                     <v-toolbar-title>Создать мероприятие</v-toolbar-title>
                     <div class="flex-grow-1"></div>
+                    <v-icon class="icon hover account hover" v-on:click="handleClose">mdi-close</v-icon>
                 </v-toolbar>
                 <v-card-text>
                     <v-form>
@@ -46,6 +47,15 @@
                                 label="Пользователи"
                         ></v-select>
 
+                        <v-select
+                                :items="listTags"
+                                v-model="tagsUids"
+                                item-text="fullName"
+                                multiple
+                                item-value="uid"
+                                label="Теги"
+                        ></v-select>
+
                     </v-form>
                 </v-card-text>
                 <v-card-actions>
@@ -65,6 +75,10 @@
           listUsers () {
               var value = this.$store.getters['users/list'];
               return value;
+          },
+
+          listTags() {
+              return ["Помощь", "Добровольчество", "Выходные"]
           }
       },
       methods: {
@@ -80,6 +94,10 @@
                   this.$router.push('/');
                   return status;
               });
+          },
+
+          handleClose() {
+              this.$store.dispatch('navbar/ToHome');
           }
       },
       data(){
@@ -87,6 +105,7 @@
               title: '',
               description: '',
               authorUids: [],
+              tagsUids: [],
               datetime:'2017-06-30 11:05:00',
           }
       }

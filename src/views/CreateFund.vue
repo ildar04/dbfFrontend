@@ -18,6 +18,7 @@
                 >
                     <v-toolbar-title>Создать фонд</v-toolbar-title>
                     <div class="flex-grow-1"></div>
+                    <v-icon class="icon hover account hover" v-on:click="handleClose">mdi-close</v-icon>
                 </v-toolbar>
                 <v-card-text>
                     <v-form>
@@ -95,6 +96,10 @@
               this.$store.dispatch('fund/createFund', data).then((status)=> {
               //     // this.$router.push('/');
               });
+          },
+
+        handleClose() {
+              this.$store.dispatch('navbar/ToHome');
           }
       },
       data(){

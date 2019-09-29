@@ -24,7 +24,7 @@ const ifAuthenticated = (to, from, next) => {
 export default new Router({
     routes: [
         {
-            path: "/activitys",
+            path: "/activities",
             component: () => import("@/views/Activity"),
             beforeEnter: ifAuthenticated
         },

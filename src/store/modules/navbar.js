@@ -21,7 +21,7 @@ export default {
   
     actions: {
         ToHome() {
-            router.push({ path: "/activity" });
+            router.push({ path: "/activities" });
         },
 
         ToLogin() {

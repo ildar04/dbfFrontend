@@ -6,25 +6,25 @@
         >
             <v-card-title class="card-details">
                 <div class="details-rating">
-                    {{currentItem.mark}}
+                    {{extendedItem.mark}}
                 </div>
                 <div class="title-row">
                     <div class="activity-name">
                         <v-icon  left class="icon hover account">mdi-library</v-icon>
-                        <span class="title font-weight-light">{{currentItem.title}}</span>
+                        <span class="title font-weight-light">{{extendedItem.title}}</span>
                     </div>
                     <div class="creation-date caption font-weight-light">
-                        {{currentItem.addDateTime}}
+                        {{extendedItem.addDateTime}}
                     </div>
                 </div>
             </v-card-title>
             <v-card-text class="card-details-content">
-                {{currentItem.description}}
+                {{extendedItem.description}}
             </v-card-text>
 
             <Comments 
                 :activityId="id"
-                :items="currentItem.comments"
+                :items="extendedItem.comments"
             />
         </v-card>
     </div>
@@ -38,11 +38,18 @@ export default {
     props: {
         id: String,
     },
+    data: function() {
+        return {
+            extendedItem: {}
+        }
+    },
     components: {
         Comments
     },
     created: function() {
-        this.$store.dispatch('activities/GetActivityDetails', this.id);
+        this.$store.dispatch('activities/GetActivityDetails', this.id).then(res => {
+            this.extendedItem = res;
+        });
     },
     computed: {
         currentItem: function() {

@@ -80,7 +80,7 @@ export default {
         },
 
         goToActivityList() {
-            this.$router.push({path: "/activitys" })
+            this.$router.push({path: "/activities" })
             this.$store.dispatch('navbar/setTab', '/activitys');
         },
 

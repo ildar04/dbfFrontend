@@ -54,7 +54,6 @@
     },
     methods: {
       handleCreateComment() {
-        debugger;
         const model = {
           entityUid: this.activityId,
           authorUid: this.uid,

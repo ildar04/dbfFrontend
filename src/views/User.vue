@@ -17,6 +17,7 @@
             >
             <v-toolbar-title>Пользователь</v-toolbar-title>
             <div class="flex-grow-1"></div>
+            <v-icon class="icon hover account hover" v-on:click="handleClose">mdi-close</v-icon>
             </v-toolbar>
             <v-card-text>
                 <v-avatar>
@@ -83,6 +84,9 @@
             },
             switchToAuth() {
                 this.$router.push('/login');
+            },
+            handleClose() {
+              this.$store.dispatch('navbar/ToHome');
             }
         },
 

@@ -8,7 +8,6 @@ export default {
     state: {
         currentActivityUid: "",
         items: [],
-        detailedItems: {},
         marks: {}
     },
   
@@ -21,10 +20,6 @@ export default {
           return state.items;
       },
 
-      getDetailedItems(state) {
-          return state.detailedItems;
-      },
-
       getMarks(state) {
           return state.marks;
       }
@@ -33,10 +28,6 @@ export default {
     mutations: {
       setItems (state, items) {
         state.items = items
-      },
-
-      setDetailedItems (state, items) {
-          state.detailedItems = items
       },
 
       setActivity(state, activityUid) {
@@ -75,7 +66,7 @@ export default {
             return commit;
         },
         GetActivityDetails({commit}, payload) {
-            API.get(`api/activity/${payload}`).then(res => {
+            return API.get(`api/activity/${payload}`).then(res => {
                 let data = res.data;
                 if (data) {
                     const helper = new Helper();
@@ -86,7 +77,7 @@ export default {
                             item.addDateTime = helper.string2date(item.addDateTime, true);
                         }
                     }
-                    commit('setDetailedItems', data);
+                    return data;
                 }
             }).catch(ex => {
                 return ex;
