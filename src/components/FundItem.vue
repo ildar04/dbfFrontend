@@ -53,7 +53,6 @@
 <script>
 
 import ActivityItemHeader from "@/components/ActivityItemHeader";
-import ActivityActions from "@/components/ActivityActions";
 import Helper from "../Helper";
 
 export default {
@@ -77,8 +76,7 @@ export default {
     },
 
     components: {
-        ActivityItemHeader,
-        ActivityActions
+        ActivityItemHeader
     },
     methods: {
         commentsCount: function() {
