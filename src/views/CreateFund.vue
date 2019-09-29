@@ -86,7 +86,7 @@
                   "uid": this.uid,
                   "title": this.title,
                   "description": this.description,
-                  "budget": this.budget,
+                  "budget": parseInt(this.budget),
                   "startDate": this.startDate,
                   "endDate": this.endDate
               }
@@ -94,7 +94,7 @@
               // console.log(data);
 
               this.$store.dispatch('fund/createFund', data).then((status)=> {
-              //     // this.$router.push('/');
+                 this.$router.push('/fund');
               });
           },
 
